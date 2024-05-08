@@ -23,7 +23,8 @@ public class Book {
     // Assume Author is another entity class that represents a book author
     @Getter
     @Setter
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "author_id")
     private Author author;
 
     @NotBlank(message = "ISBN is required")
