@@ -1,5 +1,6 @@
 package com.lkenneth.Bookstore.domain.bookstore.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,9 +27,10 @@ public class Review {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "book_id", nullable = false)
+    @JsonBackReference
     private Book book; // The book this review is associated with
 
-    // Constructors, getters, and setters
+
 
 
     public Long getId() {

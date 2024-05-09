@@ -1,5 +1,7 @@
 package com.lkenneth.Bookstore.domain.bookstore.models;
 import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +24,7 @@ public class Author {
     private String bio; // Biography of the author
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private Set<Book> books = new HashSet<>();
 
     public Author() {

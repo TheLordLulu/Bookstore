@@ -1,6 +1,8 @@
 package com.lkenneth.Bookstore.domain.bookstore.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,6 +26,7 @@ public class Book {
     @Getter
     @Setter
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonBackReference
     @JoinColumn(name = "author_id")
     private Author author;
 
@@ -41,14 +44,15 @@ public class Book {
     private Genre genre;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private Set<Review> reviews = new HashSet<>();
 
-    // Additional fields and methods
+
 
     public Book() {
     }
 
-    // Getters and Setters
+
 
     public Long getId() {
         return id;
@@ -114,7 +118,7 @@ public class Book {
         this.reviews = reviews;
     }
 
-    // Business logic methods
+
 
     /**
      * Calculates the average rating of the book based on reviews.

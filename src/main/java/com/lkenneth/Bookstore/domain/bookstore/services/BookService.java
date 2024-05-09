@@ -2,6 +2,7 @@ package com.lkenneth.Bookstore.domain.bookstore.services;
 
 import com.lkenneth.Bookstore.domain.bookstore.models.Book;
 import com.lkenneth.Bookstore.domain.bookstore.repos.BookRepo;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,9 +42,9 @@ public class BookService {
                     book.setPublicationDate(bookDetails.getPublicationDate());
                     book.setGenre(bookDetails.getGenre());
                     return bookRepo.save(book); // Saves and returns the updated book.
-                }).orElseThrow(() -> new RuntimeException("Book not found!")); // Throws an exception if the book is not found.
+                }).orElseThrow(() -> new RuntimeException("Book with ID " + id + " not found")); // Throws an exception if the book is not found.
     }
-
+    @Transactional
     public void deleteBook(Long id){
         bookRepo.deleteAllById(id);
     }
